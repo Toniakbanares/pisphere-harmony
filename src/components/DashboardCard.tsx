@@ -2,7 +2,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
 interface DashboardCardProps {
   title: string;
@@ -30,7 +29,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   };
   
   return (
-    <Link to={to}>
+    <a href={to}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -54,16 +53,16 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         
         <div className="p-5">
           <div className="flex items-center space-x-3 mb-3">
-            <div className="p-2 rounded-lg bg-white/5 text-white">
+            <div className="p-2 rounded-lg bg-white/10 text-white">
               {icon}
             </div>
             <h3 className="font-medium text-white text-lg">{title}</h3>
           </div>
           
-          <p className="text-white/70 text-sm">{description}</p>
+          <p className="text-white text-sm">{description}</p>
         </div>
       </motion.div>
-    </Link>
+    </a>
   );
 };
 

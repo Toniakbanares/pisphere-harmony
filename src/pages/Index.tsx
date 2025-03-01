@@ -50,7 +50,7 @@ const Index = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <div className="text-xs font-medium px-2 py-1 rounded-full bg-white/10 text-white/80 inline-block mb-3">
+                  <div className="text-xs font-medium px-2 py-1 rounded-full bg-white/20 text-white inline-block mb-3">
                     Welcome to PiSphere
                   </div>
                   
@@ -58,7 +58,7 @@ const Index = () => {
                     Explore the Pi Ecosystem
                   </h1>
                   
-                  <p className="text-white/70 mb-6">
+                  <p className="text-white mb-6">
                     Connect, transact, and collaborate with pioneers worldwide through a
                     seamless, decentralized platform built on Pi Network.
                   </p>
@@ -67,7 +67,7 @@ const Index = () => {
                     <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-pi-blue to-pi-purple text-white hover:shadow-lg hover:shadow-pi-blue/20 transition-all">
                       Get Started
                     </button>
-                    <button className="px-4 py-2 rounded-lg glass hover:bg-white/10 transition-colors">
+                    <button className="px-4 py-2 rounded-lg glass hover:bg-white/20 transition-colors">
                       Learn More
                     </button>
                   </div>
@@ -122,7 +122,7 @@ const Index = () => {
           title="Pi Market Hub"
           icon={<Store size={20} className="text-pi-blue" />}
           description="Browse and purchase goods and services using Pi coins in a secure marketplace."
-          to="/market"
+          to="#"
           imageUrl="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNyeXB0byUyMG1hcmtldHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"
           glowColor="blue"
         />
@@ -131,7 +131,7 @@ const Index = () => {
           title="Pi Collaborate"
           icon={<Users size={20} className="text-pi-purple" />}
           description="Work together with fellow Pioneers on projects and initiatives within the Pi ecosystem."
-          to="/collaborate"
+          to="#"
           imageUrl="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGNvbGxhYm9yYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60"
           glowColor="purple"
         />
@@ -140,7 +140,7 @@ const Index = () => {
           title="Pi Pulse"
           icon={<BarChart3 size={20} className="text-pi-gold" />}
           description="Visualize real-time data and trends within the Pi Network ecosystem."
-          to="/pulse"
+          to="#"
           imageUrl="https://images.unsplash.com/photo-1642961096842-9117c8ffc290?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNyeXB0byUyMGRhdGF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60"
           glowColor="gold"
         />

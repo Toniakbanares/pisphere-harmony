@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
         <NavItem to="/pulse" icon={<BarChart3 size={18} />} label="Pulse" />
       </div>
       
-      <div className="glass px-3 py-1.5 rounded-full flex items-center space-x-2">
+      <div className="glass px-3 py-1.5 rounded-full flex items-center space-x-2 bg-white/10">
         <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
         <span className="text-sm font-medium">38.56 π</span>
       </div>
@@ -45,10 +45,10 @@ const NavItem: React.FC<NavItemProps> = ({ to, icon, label }) => {
       to={to} 
       className="group relative flex flex-col items-center justify-center px-3 py-2 rounded-lg glass-hover"
     >
-      <div className="text-white/80 group-hover:text-white transition-colors duration-300">
+      <div className="text-white group-hover:text-white transition-colors duration-300">
         {icon}
       </div>
-      <span className="text-xs mt-1 text-white/70 group-hover:text-white transition-colors duration-300">{label}</span>
+      <span className="text-xs mt-1 text-white group-hover:text-white transition-colors duration-300">{label}</span>
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-pi-blue to-pi-purple group-hover:w-full transition-all duration-300"></div>
     </Link>
   );
