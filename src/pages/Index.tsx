@@ -9,12 +9,12 @@ import TransactionList from '@/components/TransactionList';
 import { Store, Users, BarChart3, Wallet, Activity, Shield, User } from 'lucide-react';
 
 const Index = () => {
-  // Mock data
+  // Mock data - ensuring type is explicitly "send", "receive", or "pending"
   const transactions = [
-    { id: '1', type: 'receive', amount: 12.5, address: '0x8a3e22ab9cc8c3bc4e89a76562f59ebd', time: '2 hours ago' },
-    { id: '2', type: 'send', amount: 5.25, address: '0xf14a7c67b14c90add9eeb42b0c', time: '5 hours ago' },
-    { id: '3', type: 'receive', amount: 0.75, address: '0x6d2e07b9ef9e405ab15c3e96f', time: 'yesterday' },
-    { id: '4', type: 'pending', amount: 2.0, address: '0x3a9b8d7c6f5e4d3c2b1a0', time: 'processing' },
+    { id: '1', type: 'receive' as const, amount: 12.5, address: '0x8a3e22ab9cc8c3bc4e89a76562f59ebd', time: '2 hours ago' },
+    { id: '2', type: 'send' as const, amount: 5.25, address: '0xf14a7c67b14c90add9eeb42b0c', time: '5 hours ago' },
+    { id: '3', type: 'receive' as const, amount: 0.75, address: '0x6d2e07b9ef9e405ab15c3e96f', time: 'yesterday' },
+    { id: '4', type: 'pending' as const, amount: 2.0, address: '0x3a9b8d7c6f5e4d3c2b1a0', time: 'processing' },
   ];
 
   const container = {
