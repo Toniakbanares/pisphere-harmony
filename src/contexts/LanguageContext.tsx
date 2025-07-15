@@ -151,25 +151,3 @@ export const useLanguage = () => {
   }
   return context;
 };
-</LanguageContext.tsx>
-
-<lov-write file_path="src/components/ThemeToggle.tsx">
-import React from 'react';
-import { Sun, Moon } from 'lucide-react';
-import { useTheme } from '@/contexts/ThemeContext';
-
-const ThemeToggle: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
-
-  return (
-    <button
-      onClick={toggleTheme}
-      className="p-2 rounded-lg glass-hover transition-all"
-      aria-label="Toggle theme"
-    >
-      {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-    </button>
-  );
-};
-
-export default ThemeToggle;
