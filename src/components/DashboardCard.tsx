@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
@@ -29,7 +30,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   };
   
   return (
-    <a href={to}>
+    <Link to={to}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -62,7 +63,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           <p className="text-white text-sm">{description}</p>
         </div>
       </motion.div>
-    </a>
+    </Link>
   );
 };
 

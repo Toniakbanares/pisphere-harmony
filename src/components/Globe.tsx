@@ -1,205 +1,98 @@
 
-import React, { useEffect, useRef } from 'react';
-import { cn } from '@/lib/utils';
+import React, { useRef, useEffect } from 'react';
 
-interface GlobeProps {
-  className?: string;
-}
-
-const Globe: React.FC<GlobeProps> = ({ className }) => {
+const Globe: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    
-    // Set canvas dimensions
+
+    let animationId: number;
+    let time = 0;
+
     const resizeCanvas = () => {
-      try {
-        const dpr = window.devicePixelRatio || 1;
-        canvas.width = canvas.clientWidth * dpr;
-        canvas.height = canvas.clientHeight * dpr;
-        ctx.scale(dpr, dpr);
-      } catch (err) {
-        console.error("Error resizing canvas:", err);
+      const parent = canvas.parentElement;
+      if (parent) {
+        canvas.width = parent.clientWidth;
+        canvas.height = parent.clientHeight;
       }
     };
-    
-    try {
-      window.addEventListener('resize', resizeCanvas);
-      resizeCanvas();
-      
-      // Globe parameters
-      const centerX = canvas.clientWidth / 2;
-      const centerY = canvas.clientHeight / 2;
-      const radius = Math.min(canvas.clientWidth, canvas.clientHeight) * 0.3;
-      
-      // Create nodes
-      const nodesCount = 40;
-      const nodes: { x: number; y: number; size: number; pulse: number; speed: number }[] = [];
-      
-      for (let i = 0; i < nodesCount; i++) {
-        // Generate random position on the globe surface
-        const angle1 = Math.random() * Math.PI * 2;
-        const angle2 = Math.random() * Math.PI * 2;
+
+    const draw = () => {
+      try {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        const x = centerX + radius * Math.sin(angle1) * Math.cos(angle2);
-        const y = centerY + radius * Math.sin(angle1) * Math.sin(angle2);
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const maxRadius = Math.min(canvas.width, canvas.height) / 3;
         
-        nodes.push({
-          x,
-          y,
-          size: 1 + Math.random() * 2,
-          pulse: Math.random() * 2 * Math.PI, // Random starting phase
-          speed: 0.02 + Math.random() * 0.03 // Random speed
-        });
-      }
-      
-      // Animation variables
-      let animationFrameId: number;
-      let rotation = 0;
-      
-      // Draw function
-      const draw = () => {
-        try {
-          ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+        // Ensure radius is always positive
+        const radius = Math.max(maxRadius, 10);
+        
+        // Draw globe outline
+        ctx.strokeStyle = '#3b82f6';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        // Draw rotating lines
+        for (let i = 0; i < 6; i++) {
+          const angle = (time * 0.01) + (i * Math.PI / 3);
+          const x1 = centerX + Math.cos(angle) * radius * 0.8;
+          const y1 = centerY + Math.sin(angle) * radius * 0.8;
+          const x2 = centerX + Math.cos(angle + Math.PI) * radius * 0.8;
+          const y2 = centerY + Math.sin(angle + Math.PI) * radius * 0.8;
           
-          // Update rotation
-          rotation += 0.001;
-          
-          // Draw globe outline
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(14, 165, 233, 0.4)';
+          ctx.strokeStyle = `rgba(59, 130, 246, ${0.3 + Math.sin(time * 0.02 + i) * 0.2})`;
           ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
           ctx.stroke();
-          
-          // Draw grid lines
-          const gridCount = 8;
-          
-          // Longitudinal lines
-          for (let i = 0; i < gridCount; i++) {
-            const angle = (i / gridCount) * Math.PI * 2 + rotation;
-            
-            ctx.beginPath();
-            ctx.ellipse(
-              centerX,
-              centerY,
-              radius * Math.abs(Math.cos(angle)),
-              radius,
-              0,
-              0,
-              Math.PI * 2
-            );
-            ctx.strokeStyle = 'rgba(14, 165, 233, 0.3)';
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-          
-          // Latitudinal lines
-          for (let i = 1; i < gridCount / 2; i++) {
-            const height = radius * Math.sin((i / (gridCount / 2)) * Math.PI);
-            const circleRadius = Math.cos((i / (gridCount / 2)) * Math.PI) * radius;
-            
-            ctx.beginPath();
-            ctx.arc(centerX, centerY + height, circleRadius, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(14, 165, 233, 0.3)';
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-            
-            ctx.beginPath();
-            ctx.arc(centerX, centerY - height, circleRadius, 0, Math.PI * 2);
-            ctx.stroke();
-          }
-          
-          // Update and draw nodes
-          for (let i = 0; i < nodes.length; i++) {
-            const node = nodes[i];
-            
-            // Update pulse
-            node.pulse += node.speed;
-            
-            // Calculate node position with rotation
-            const nodeAngle = Math.atan2(node.y - centerY, node.x - centerX) + rotation * 0.5;
-            const distance = Math.sqrt(Math.pow(node.x - centerX, 2) + Math.pow(node.y - centerY, 2));
-            const newX = centerX + distance * Math.cos(nodeAngle);
-            const newY = centerY + distance * Math.sin(nodeAngle);
-            
-            // Draw node with pulsating effect
-            const pulseSize = node.size * (0.8 + 0.4 * Math.sin(node.pulse));
-            
-            ctx.beginPath();
-            ctx.arc(newX, newY, pulseSize, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(14, 165, 233, ${0.7 + 0.3 * Math.sin(node.pulse)})`;
-            ctx.fill();
-            
-            // Draw glow
-            ctx.beginPath();
-            ctx.arc(newX, newY, pulseSize * 2, 0, Math.PI * 2);
-            const gradient = ctx.createRadialGradient(newX, newY, pulseSize * 0.5, newX, newY, pulseSize * 2);
-            gradient.addColorStop(0, 'rgba(14, 165, 233, 0.5)');
-            gradient.addColorStop(1, 'rgba(14, 165, 233, 0)');
-            ctx.fillStyle = gradient;
-            ctx.fill();
-          }
-          
-          // Draw occasional transaction line
-          if (Math.random() < 0.02) {
-            const node1 = nodes[Math.floor(Math.random() * nodes.length)];
-            const node2 = nodes[Math.floor(Math.random() * nodes.length)];
-            
-            ctx.beginPath();
-            ctx.moveTo(
-              centerX + (node1.x - centerX) * Math.cos(rotation) - (node1.y - centerY) * Math.sin(rotation),
-              centerY + (node1.x - centerX) * Math.sin(rotation) + (node1.y - centerY) * Math.cos(rotation)
-            );
-            ctx.lineTo(
-              centerX + (node2.x - centerX) * Math.cos(rotation) - (node2.y - centerY) * Math.sin(rotation),
-              centerY + (node2.x - centerX) * Math.sin(rotation) + (node2.y - centerY) * Math.cos(rotation)
-            );
-            
-            ctx.strokeStyle = 'rgba(139, 92, 246, 0.9)';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-            
-            // Draw small pulse at transaction end
-            ctx.beginPath();
-            ctx.arc(
-              centerX + (node2.x - centerX) * Math.cos(rotation) - (node2.y - centerY) * Math.sin(rotation),
-              centerY + (node2.x - centerX) * Math.sin(rotation) + (node2.y - centerY) * Math.cos(rotation),
-              3,
-              0,
-              Math.PI * 2
-            );
-            ctx.fillStyle = 'rgba(139, 92, 246, 0.9)';
-            ctx.fill();
-          }
-          
-          animationFrameId = requestAnimationFrame(draw);
-        } catch (err) {
-          console.error("Error in draw function:", err);
         }
-      };
-      
-      draw();
-      
-      return () => {
-        window.removeEventListener('resize', resizeCanvas);
-        cancelAnimationFrame(animationFrameId);
-      };
-    } catch (err) {
-      console.error("Error in Globe component:", err);
-      return () => {};
-    }
+        
+        // Draw dots
+        for (let i = 0; i < 12; i++) {
+          const angle = (time * 0.005) + (i * Math.PI / 6);
+          const dotRadius = radius * (0.9 + Math.sin(time * 0.01 + i) * 0.1);
+          const x = centerX + Math.cos(angle) * dotRadius;
+          const y = centerY + Math.sin(angle) * dotRadius;
+          
+          ctx.fillStyle = `rgba(139, 92, 246, ${0.5 + Math.sin(time * 0.03 + i) * 0.3})`;
+          ctx.beginPath();
+          ctx.arc(x, y, 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        time++;
+        animationId = requestAnimationFrame(draw);
+      } catch (error) {
+        console.error('Error in draw function:', error);
+      }
+    };
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    draw();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
   }, []);
-  
+
   return (
     <canvas
       ref={canvasRef}
-      className={cn('w-full h-full', className)}
+      className="absolute inset-0 w-full h-full"
+      style={{ pointerEvents: 'none' }}
     />
   );
 };

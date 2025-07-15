@@ -3,88 +3,142 @@ import React, { createContext, useContext, useState } from 'react';
 
 type Language = 'pt' | 'en';
 
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+interface Translations {
+  welcome: {
+    title: string;
+    subtitle: string;
+    description: string;
+    getStarted: string;
+    learnMore: string;
+  };
+  nav: {
+    home: string;
+    market: string;
+    collaborate: string;
+    pulse: string;
+  };
+  stats: {
+    piBalance: string;
+    networkActivity: string;
+    securityScore: string;
+    kycStatus: string;
+    verified: string;
+  };
+  features: {
+    title: string;
+  };
+  market: {
+    title: string;
+    description: string;
+  };
+  collaborate: {
+    title: string;
+    description: string;
+  };
+  pulse: {
+    title: string;
+    description: string;
+  };
 }
 
-const translations = {
+const translations: Record<Language, Translations> = {
   pt: {
-    'nav.home': 'Início',
-    'nav.market': 'Mercado',
-    'nav.collaborate': 'Colaborar',
-    'nav.pulse': 'Pulse',
-    'welcome.title': 'Bem-vindo ao PiSphere',
-    'welcome.subtitle': 'Explore o Ecossistema Pi',
-    'welcome.description': 'Conecte-se, transacione e colabore com pioneiros em todo o mundo através de uma plataforma descentralizada e contínua construída na Rede Pi.',
-    'welcome.getStarted': 'Começar',
-    'welcome.learnMore': 'Saiba Mais',
-    'stats.piBalance': 'Saldo Pi',
-    'stats.networkActivity': 'Atividade da Rede',
-    'stats.securityScore': 'Pontuação de Segurança',
-    'stats.kycStatus': 'Status KYC',
-    'stats.verified': 'Verificado',
-    'features.title': 'Recursos da Rede Pi',
-    'market.title': 'Hub do Mercado Pi',
-    'market.description': 'Navegue e compre bens e serviços usando moedas Pi em um mercado seguro.',
-    'collaborate.title': 'Pi Colaborar',
-    'collaborate.description': 'Trabalhe junto com outros Pioneiros em projetos e iniciativas dentro do ecossistema Pi.',
-    'pulse.title': 'Pi Pulse',
-    'pulse.description': 'Visualize dados e tendências em tempo real dentro do ecossistema da Rede Pi.',
-    'transactions.recent': 'Transações Recentes',
-    'transactions.receive': 'Recebido',
-    'transactions.send': 'Enviado',
-    'transactions.pending': 'Pendente',
+    welcome: {
+      title: 'Bem-vindo ao PiSphere',
+      subtitle: 'Seu hub para o ecossistema Pi',
+      description: 'Conecte-se, colabore e cresça no futuro da economia digital com Pi Network.',
+      getStarted: 'Começar',
+      learnMore: 'Saiba Mais'
+    },
+    nav: {
+      home: 'Início',
+      market: 'Mercado',
+      collaborate: 'Colaborar',
+      pulse: 'Pulse'
+    },
+    stats: {
+      piBalance: 'Saldo Pi',
+      networkActivity: 'Atividade da Rede',
+      securityScore: 'Pontuação de Segurança',
+      kycStatus: 'Status KYC',
+      verified: 'Verificado'
+    },
+    features: {
+      title: 'Recursos em Destaque'
+    },
+    market: {
+      title: 'Mercado Pi',
+      description: 'Descubra e negocie no marketplace descentralizado'
+    },
+    collaborate: {
+      title: 'Colaborar',
+      description: 'Conecte-se com pioneiros e construa juntos'
+    },
+    pulse: {
+      title: 'Network Pulse',
+      description: 'Monitore métricas e insights da rede em tempo real'
+    }
   },
   en: {
-    'nav.home': 'Home',
-    'nav.market': 'Market',
-    'nav.collaborate': 'Collaborate',
-    'nav.pulse': 'Pulse',
-    'welcome.title': 'Welcome to PiSphere',
-    'welcome.subtitle': 'Explore the Pi Ecosystem',
-    'welcome.description': 'Connect, transact, and collaborate with pioneers worldwide through a seamless, decentralized platform built on Pi Network.',
-    'welcome.getStarted': 'Get Started',
-    'welcome.learnMore': 'Learn More',
-    'stats.piBalance': 'Pi Balance',
-    'stats.networkActivity': 'Network Activity',
-    'stats.securityScore': 'Security Score',
-    'stats.kycStatus': 'KYC Status',
-    'stats.verified': 'Verified',
-    'features.title': 'Pi Network Features',
-    'market.title': 'Pi Market Hub',
-    'market.description': 'Browse and purchase goods and services using Pi coins in a secure marketplace.',
-    'collaborate.title': 'Pi Collaborate',
-    'collaborate.description': 'Work together with fellow Pioneers on projects and initiatives within the Pi ecosystem.',
-    'pulse.title': 'Pi Pulse',
-    'pulse.description': 'Visualize real-time data and trends within the Pi Network ecosystem.',
-    'transactions.recent': 'Recent Transactions',
-    'transactions.receive': 'Received',
-    'transactions.send': 'Sent',
-    'transactions.pending': 'Pending',
-  },
+    welcome: {
+      title: 'Welcome to PiSphere',
+      subtitle: 'Your hub for the Pi ecosystem',
+      description: 'Connect, collaborate, and grow in the future of digital economy with Pi Network.',
+      getStarted: 'Get Started',
+      learnMore: 'Learn More'
+    },
+    nav: {
+      home: 'Home',
+      market: 'Market',
+      collaborate: 'Collaborate',
+      pulse: 'Pulse'
+    },
+    stats: {
+      piBalance: 'Pi Balance',
+      networkActivity: 'Network Activity',
+      securityScore: 'Security Score',
+      kycStatus: 'KYC Status',
+      verified: 'Verified'
+    },
+    features: {
+      title: 'Featured'
+    },
+    market: {
+      title: 'Pi Market',
+      description: 'Discover and trade in the decentralized marketplace'
+    },
+    collaborate: {
+      title: 'Collaborate',
+      description: 'Connect with pioneers and build together'
+    },
+    pulse: {
+      title: 'Network Pulse',
+      description: 'Monitor real-time network metrics and insights'
+    }
+  }
 };
+
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (language: Language) => void;
+  t: (key: string) => string;
+}
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(() => {
-    const saved = localStorage.getItem('language');
-    return (saved as Language) || 'pt';
-  });
+  const [language, setLanguage] = useState<Language>('pt');
 
-  const t = (key: string): string => {
-    return translations[language][key] || key;
+  const getNestedValue = (obj: any, path: string): string => {
+    return path.split('.').reduce((o, p) => o?.[p], obj) || path;
   };
 
-  const handleSetLanguage = (lang: Language) => {
-    setLanguage(lang);
-    localStorage.setItem('language', lang);
+  const t = (key: string): string => {
+    return getNestedValue(translations[language], key);
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
@@ -97,3 +151,25 @@ export const useLanguage = () => {
   }
   return context;
 };
+</LanguageContext.tsx>
+
+<lov-write file_path="src/components/ThemeToggle.tsx">
+import React from 'react';
+import { Sun, Moon } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
+
+const ThemeToggle: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button
+      onClick={toggleTheme}
+      className="p-2 rounded-lg glass-hover transition-all"
+      aria-label="Toggle theme"
+    >
+      {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+    </button>
+  );
+};
+
+export default ThemeToggle;
