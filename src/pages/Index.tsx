@@ -7,8 +7,11 @@ import DashboardCard from '@/components/DashboardCard';
 import StatCard from '@/components/StatCard';
 import TransactionList from '@/components/TransactionList';
 import { Store, Users, BarChart3, Wallet, Activity, Shield, User } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {
+  const { t } = useLanguage();
+  
   // Mock data - ensuring type is explicitly "send", "receive", or "pending"
   const transactions = [
     { id: '1', type: 'receive' as const, amount: 12.5, address: '0x8a3e22ab9cc8c3bc4e89a76562f59ebd', time: '2 hours ago' },
@@ -28,7 +31,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-pi-dark text-white px-4 sm:px-6 py-6 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-background text-foreground px-4 sm:px-6 py-6 max-w-7xl mx-auto">
       <Navbar />
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
@@ -50,25 +53,24 @@ const Index = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <div className="text-xs font-medium px-2 py-1 rounded-full bg-white/20 text-white inline-block mb-3">
-                    Welcome to PiSphere
+                  <div className="text-xs font-medium px-2 py-1 rounded-full bg-primary/20 text-primary inline-block mb-3">
+                    {t('welcome.title')}
                   </div>
                   
                   <h1 className="text-3xl md:text-4xl font-bold mb-3">
-                    Explore the Pi Ecosystem
+                    {t('welcome.subtitle')}
                   </h1>
                   
-                  <p className="text-white mb-6">
-                    Connect, transact, and collaborate with pioneers worldwide through a
-                    seamless, decentralized platform built on Pi Network.
+                  <p className="text-muted-foreground mb-6">
+                    {t('welcome.description')}
                   </p>
                   
                   <div className="flex space-x-4">
-                    <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-pi-blue to-pi-purple text-white hover:shadow-lg hover:shadow-pi-blue/20 transition-all">
-                      Get Started
+                    <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-pi-blue to-pi-purple text-white hover:shadow-lg hover:shadow-primary/20 transition-all">
+                      {t('welcome.getStarted')}
                     </button>
-                    <button className="px-4 py-2 rounded-lg glass hover:bg-white/20 transition-colors">
-                      Learn More
+                    <button className="px-4 py-2 rounded-lg glass hover:bg-background/20 transition-colors">
+                      {t('welcome.learnMore')}
                     </button>
                   </div>
                 </motion.div>
@@ -84,33 +86,33 @@ const Index = () => {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <StatCard
-          title="Pi Balance"
+          title={t('stats.piBalance')}
           value="38.56 π"
           icon={<Wallet size={18} className="text-pi-blue" />}
           change={{ value: 2.4, isPositive: true }}
         />
         
         <StatCard
-          title="Network Activity"
+          title={t('stats.networkActivity')}
           value="1.2M+"
           icon={<Activity size={18} className="text-pi-purple" />}
           change={{ value: 5.7, isPositive: true }}
         />
         
         <StatCard
-          title="Security Score"
+          title={t('stats.securityScore')}
           value="94%"
           icon={<Shield size={18} className="text-pi-gold" />}
         />
         
         <StatCard
-          title="KYC Status"
-          value="Verified"
+          title={t('stats.kycStatus')}
+          value={t('stats.verified')}
           icon={<User size={18} className="text-green-400" />}
         />
       </div>
       
-      <h2 className="text-xl font-medium mb-4">Pi Network Features</h2>
+      <h2 className="text-xl font-medium mb-4">{t('features.title')}</h2>
       
       <motion.div 
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -119,28 +121,28 @@ const Index = () => {
         animate="show"
       >
         <DashboardCard
-          title="Pi Market Hub"
+          title={t('market.title')}
           icon={<Store size={20} className="text-pi-blue" />}
-          description="Browse and purchase goods and services using Pi coins in a secure marketplace."
-          to="#"
+          description={t('market.description')}
+          to="/market"
           imageUrl="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNyeXB0byUyMG1hcmtldHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"
           glowColor="blue"
         />
         
         <DashboardCard
-          title="Pi Collaborate"
+          title={t('collaborate.title')}
           icon={<Users size={20} className="text-pi-purple" />}
-          description="Work together with fellow Pioneers on projects and initiatives within the Pi ecosystem."
-          to="#"
+          description={t('collaborate.description')}
+          to="/collaborate"
           imageUrl="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGNvbGxhYm9yYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60"
           glowColor="purple"
         />
         
         <DashboardCard
-          title="Pi Pulse"
+          title={t('pulse.title')}
           icon={<BarChart3 size={20} className="text-pi-gold" />}
-          description="Visualize real-time data and trends within the Pi Network ecosystem."
-          to="#"
+          description={t('pulse.description')}
+          to="/pulse"
           imageUrl="https://images.unsplash.com/photo-1642961096842-9117c8ffc290?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNyeXB0byUyMGRhdGF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60"
           glowColor="gold"
         />
