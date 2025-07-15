@@ -70,6 +70,7 @@ body {
   font-family: 'Inter', sans-serif;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer components {
@@ -81,6 +82,16 @@ body {
 
   .glass-hover:hover {
     background: rgba(255, 255, 255, 0.15);
+  }
+
+  .light .glass {
+    background: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .light .glass-hover:hover {
+    background: rgba(0, 0, 0, 0.1);
   }
 
   .glow {
@@ -102,14 +113,4 @@ body {
 
 .light {
   color-scheme: light;
-}
-
-.light .glass {
-  background: rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.light .glass-hover:hover {
-  background: rgba(0, 0, 0, 0.1);
 }
