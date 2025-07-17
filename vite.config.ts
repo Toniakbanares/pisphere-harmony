@@ -29,5 +29,6 @@ export default defineConfig(({ mode }) => ({
         manualChunks: undefined,
       },
     },
+    sourcemap: false,
   },
 }));
