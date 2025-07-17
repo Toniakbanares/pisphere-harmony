@@ -46,8 +46,8 @@ const translations: Record<Language, Translations> = {
     welcome: {
       title: 'Bem-vindo ao PiSphere',
       subtitle: 'Seu hub para o ecossistema Pi',
-      description: 'Conecte-se, colabore e cresça no futuro da economia digital com Pi Network.',
-      getStarted: 'Começar',
+      description: 'Conecte-se, colabore e cresça no futuro da economia digital com Pi Network. Descubra oportunidades, monitore métricas e participe da revolução financeira descentralizada.',
+      getStarted: 'Começar Agora',
       learnMore: 'Saiba Mais'
     },
     nav: {
@@ -64,26 +64,26 @@ const translations: Record<Language, Translations> = {
       verified: 'Verificado'
     },
     features: {
-      title: 'Recursos em Destaque'
+      title: 'Recursos Principais'
     },
     market: {
       title: 'Mercado Pi',
-      description: 'Descubra e negocie no marketplace descentralizado'
+      description: 'Descubra e negocie no marketplace descentralizado do ecossistema Pi'
     },
     collaborate: {
       title: 'Colaborar',
-      description: 'Conecte-se com pioneiros e construa juntos'
+      description: 'Conecte-se com pioneiros e construa projetos incríveis juntos'
     },
     pulse: {
       title: 'Network Pulse',
-      description: 'Monitore métricas e insights da rede em tempo real'
+      description: 'Monitore métricas e insights da rede Pi em tempo real'
     }
   },
   en: {
     welcome: {
       title: 'Welcome to PiSphere',
       subtitle: 'Your hub for the Pi ecosystem',
-      description: 'Connect, collaborate, and grow in the future of digital economy with Pi Network.',
+      description: 'Connect, collaborate, and grow in the future of digital economy with Pi Network. Discover opportunities, monitor metrics and participate in the decentralized financial revolution.',
       getStarted: 'Get Started',
       learnMore: 'Learn More'
     },
@@ -101,19 +101,19 @@ const translations: Record<Language, Translations> = {
       verified: 'Verified'
     },
     features: {
-      title: 'Featured'
+      title: 'Main Features'
     },
     market: {
       title: 'Pi Market',
-      description: 'Discover and trade in the decentralized marketplace'
+      description: 'Discover and trade in the decentralized Pi ecosystem marketplace'
     },
     collaborate: {
       title: 'Collaborate',
-      description: 'Connect with pioneers and build together'
+      description: 'Connect with pioneers and build amazing projects together'
     },
     pulse: {
       title: 'Network Pulse',
-      description: 'Monitor real-time network metrics and insights'
+      description: 'Monitor real-time Pi network metrics and insights'
     }
   }
 };
