@@ -12,6 +12,8 @@ import Collaborate from "./pages/Collaborate";
 import Pulse from "./pages/Pulse";
 import NotFound from "./pages/NotFound";
 
+console.log('📦 Carregando componentes do App...');
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -21,26 +23,30 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <LanguageProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <HashRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/market" element={<Market />} />
-              <Route path="/collaborate" element={<Collaborate />} />
-              <Route path="/pulse" element={<Pulse />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </HashRouter>
-        </TooltipProvider>
-      </LanguageProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  console.log('🎨 Renderizando App component...');
+  
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <LanguageProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <HashRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/market" element={<Market />} />
+                <Route path="/collaborate" element={<Collaborate />} />
+                <Route path="/pulse" element={<Pulse />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </HashRouter>
+          </TooltipProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
