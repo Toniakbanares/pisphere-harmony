@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? "/pisphere-harmony/" : "/",
+  base: "/pisphere-harmony/",
   server: {
     host: "::",
     port: 8080,

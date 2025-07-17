@@ -23,6 +23,6 @@ if (!rootElement) {
     console.log('✅ Aplicação iniciada com sucesso!');
   } catch (error) {
     console.error('❌ Erro ao iniciar aplicação:', error);
-    rootElement.innerHTML = '<div style="color: white; background: #1a1a1a; padding: 20px; font-family: Arial;">Erro ao carregar a aplicação: ' + error + '</div>';
+    rootElement.innerHTML = '<div style="color: white; background: #1a1a1a; padding: 20px; font-family: Arial;">Erro ao carregar a aplicação: ' + (error as Error).message + '</div>';
   }
 }
