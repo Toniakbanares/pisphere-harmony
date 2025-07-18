@@ -110,9 +110,9 @@ const Index = () => {
         <motion.div variants={item}>
           <StatCard
             title={t('stats.piBalance')}
-            value="124.85 π"
+            value="1,000,000.00 π"
             icon={<Wallet size={18} className="text-pi-blue" />}
-            change={{ value: 8.2, isPositive: true }}
+            change={{ value: 15.7, isPositive: true }}
           />
         </motion.div>
         

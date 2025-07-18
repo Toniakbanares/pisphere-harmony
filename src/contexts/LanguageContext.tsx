@@ -16,6 +16,8 @@ interface Translations {
     market: string;
     collaborate: string;
     pulse: string;
+    exchange: string;
+    transfer: string;
   };
   stats: {
     piBalance: string;
@@ -39,6 +41,36 @@ interface Translations {
     title: string;
     description: string;
   };
+  exchange: {
+    title: string;
+    description: string;
+    piToUsdt: string;
+    piToBrl: string;
+    amount: string;
+    exchangeRate: string;
+    convert: string;
+    availableBalance: string;
+    estimatedReceive: string;
+  };
+  transfer: {
+    title: string;
+    description: string;
+    pixTransfer: string;
+    enterAmount: string;
+    pixKey: string;
+    transferNow: string;
+    confirmTransfer: string;
+    processingTime: string;
+  };
+  common: {
+    balance: string;
+    amount: string;
+    cancel: string;
+    confirm: string;
+    success: string;
+    error: string;
+    loading: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -54,7 +86,9 @@ const translations: Record<Language, Translations> = {
       home: 'Início',
       market: 'Mercado',
       collaborate: 'Colaborar',
-      pulse: 'Pulse'
+      pulse: 'Pulse',
+      exchange: 'Câmbio',
+      transfer: 'Transferir'
     },
     stats: {
       piBalance: 'Saldo Pi',
@@ -77,6 +111,36 @@ const translations: Record<Language, Translations> = {
     pulse: {
       title: 'Network Pulse',
       description: 'Monitore métricas e insights da rede Pi em tempo real'
+    },
+    exchange: {
+      title: 'Câmbio Pi',
+      description: 'Troque seus Pi por USDT ou Reais (BRL) com as melhores taxas',
+      piToUsdt: 'Pi → USDT',
+      piToBrl: 'Pi → BRL',
+      amount: 'Quantidade',
+      exchangeRate: 'Taxa de Câmbio',
+      convert: 'Converter',
+      availableBalance: 'Saldo Disponível',
+      estimatedReceive: 'Você Receberá'
+    },
+    transfer: {
+      title: 'Transferência PIX',
+      description: 'Transfira Pi convertidos em reais via PIX instantaneamente',
+      pixTransfer: 'Transferir via PIX',
+      enterAmount: 'Digite o valor em reais',
+      pixKey: 'Chave PIX',
+      transferNow: 'Transferir Agora',
+      confirmTransfer: 'Confirmar Transferência',
+      processingTime: 'Processamento: Instantâneo'
+    },
+    common: {
+      balance: 'Saldo',
+      amount: 'Valor',
+      cancel: 'Cancelar',
+      confirm: 'Confirmar',
+      success: 'Sucesso',
+      error: 'Erro',
+      loading: 'Carregando'
     }
   },
   en: {
@@ -91,7 +155,9 @@ const translations: Record<Language, Translations> = {
       home: 'Home',
       market: 'Market',
       collaborate: 'Collaborate',
-      pulse: 'Pulse'
+      pulse: 'Pulse',
+      exchange: 'Exchange',
+      transfer: 'Transfer'
     },
     stats: {
       piBalance: 'Pi Balance',
@@ -114,6 +180,36 @@ const translations: Record<Language, Translations> = {
     pulse: {
       title: 'Network Pulse',
       description: 'Monitor real-time Pi network metrics and insights'
+    },
+    exchange: {
+      title: 'Pi Exchange',
+      description: 'Exchange your Pi for USDT or Brazilian Real (BRL) with the best rates',
+      piToUsdt: 'Pi → USDT',
+      piToBrl: 'Pi → BRL',
+      amount: 'Amount',
+      exchangeRate: 'Exchange Rate',
+      convert: 'Convert',
+      availableBalance: 'Available Balance',
+      estimatedReceive: 'You Will Receive'
+    },
+    transfer: {
+      title: 'PIX Transfer',
+      description: 'Transfer Pi converted to reais via PIX instantly',
+      pixTransfer: 'Transfer via PIX',
+      enterAmount: 'Enter amount in reais',
+      pixKey: 'PIX Key',
+      transferNow: 'Transfer Now',
+      confirmTransfer: 'Confirm Transfer',
+      processingTime: 'Processing: Instant'
+    },
+    common: {
+      balance: 'Balance',
+      amount: 'Amount',
+      cancel: 'Cancel',
+      confirm: 'Confirm',
+      success: 'Success',
+      error: 'Error',
+      loading: 'Loading'
     }
   }
 };

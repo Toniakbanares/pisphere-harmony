@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Globe, Store, Users, BarChart3 } from 'lucide-react';
+import { Globe, Store, Users, BarChart3, ArrowRightLeft, Send } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
@@ -22,11 +22,13 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
         <span className="font-medium text-lg">PiSphere</span>
       </Link>
       
-      <div className="flex items-center space-x-1 sm:space-x-4">
+      <div className="flex items-center space-x-1 sm:space-x-2">
         <NavItem to="/" icon={<Globe size={18} />} label={t('nav.home')} />
         <NavItem to="/market" icon={<Store size={18} />} label={t('nav.market')} />
         <NavItem to="/collaborate" icon={<Users size={18} />} label={t('nav.collaborate')} />
         <NavItem to="/pulse" icon={<BarChart3 size={18} />} label={t('nav.pulse')} />
+        <NavItem to="/exchange" icon={<ArrowRightLeft size={18} />} label={t('nav.exchange')} />
+        <NavItem to="/transfer" icon={<Send size={18} />} label={t('nav.transfer')} />
       </div>
       
       <div className="flex items-center space-x-2">
@@ -34,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
         <LanguageToggle />
         <div className="glass px-3 py-1.5 rounded-full flex items-center space-x-2 bg-background/30">
           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-          <span className="text-sm font-medium">38.56 π</span>
+          <span className="text-sm font-medium">1M π</span>
         </div>
       </div>
     </div>

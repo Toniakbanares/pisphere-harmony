@@ -10,6 +10,8 @@ import Index from "./pages/Index";
 import Market from "./pages/Market";
 import Collaborate from "./pages/Collaborate";
 import Pulse from "./pages/Pulse";
+import Exchange from "./pages/Exchange";
+import Transfer from "./pages/Transfer";
 import NotFound from "./pages/NotFound";
 
 console.log('📦 Carregando componentes do App...');
@@ -39,6 +41,8 @@ const App = () => {
                 <Route path="/market" element={<Market />} />
                 <Route path="/collaborate" element={<Collaborate />} />
                 <Route path="/pulse" element={<Pulse />} />
+                <Route path="/exchange" element={<Exchange />} />
+                <Route path="/transfer" element={<Transfer />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </HashRouter>
